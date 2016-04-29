@@ -9,8 +9,8 @@
   2. Exam Mode -> Set maximum of 30 Exams Timings in this mode
 5. We also provide a Manual switch with this so that you can control on your own if there's some emergency/temporary change in timings
 
-#$ Automatic Water Level Controller
-1. 
+#$ Automatic Water Level Controller (For over tanks)
+1.  
 
 #$ GSM based Irrigation Pump System
 1. 
