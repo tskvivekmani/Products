@@ -5,10 +5,7 @@ void settings()
   int Cursor = 1;
   
   //Holds location of sets [1,5,9,...77]
-  int locate=1;
-  
-  //Holds count value of corresponding set
-  int cnt=Eread(locate);
+  int locate = 1;
   
   lcd.clear();
   lcd.setCursor(0,0);
@@ -33,6 +30,7 @@ void settings()
   lcd.print(" =>   ");
   countDisp(Eread(locate));
   int temp = 0;
+  
   while(digitalRead(set) == HIGH)
   {
     if(digitalRead(select) == HIGH){
@@ -41,20 +39,17 @@ void settings()
         Cursor=1;
       else
         ++Cursor;
+//      if(Cursor%5 == 1) {temp = (locate/4)+1;}
     }
+    
     if(digitalRead(incr) == HIGH){
       delay(500);
       ++temp;
-      if(Cursor%5 == 1){
-        ESet++;
-      }
     }
     if(digitalRead(decr) == HIGH){
       delay(500);
       --temp;
     }
-    
-    int posi = Cursor/5+1;
     
     if(Cursor%5 == 1)
     {
@@ -69,6 +64,7 @@ void settings()
       lcd.print("  ");
       lcd.setCursor(2,1);
       lcd.print(ESet);
+      blinkCursor();
       if( ESet < 10)
       {
         lcd.setCursor(3,1);
@@ -77,6 +73,8 @@ void settings()
       int x = ESet-1;
       //x => [0,1,2,...19] => [1, 1*4+1=5,  2*4+1=9, ... , 20*4+1]
       locate = x*4+1;
+      //Display counts according to locate/set
+      countDisp(Eread(locate));
     }
     else if(Cursor%5 == 2)
     {
@@ -115,4 +113,12 @@ void countDisp(int currentCount)
   else if(currentCount > 999 && currentCount < 10000)   { lcd.print(currentCount); }
   lcd.setCursor(14,1);
   lcd.print("  ");
+}
+
+// Blinking cursor
+void blinkCursor()
+{
+  lcd.blink();
+  delay(50);
+  lcd.noBlink();
 }
